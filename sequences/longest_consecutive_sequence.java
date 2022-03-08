@@ -29,3 +29,45 @@ class Solution {
         return maxStreak;
     }
 }
+
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        
+        Set<Integer> numsSet = new HashSet<>();
+        
+        for (int n : nums) {
+            numsSet.add(n);
+        }
+        
+        
+        int streak = 0;
+        while (!numsSet.isEmpty()) {
+            int cur = numsSet.iterator().next();
+            numsSet.remove(cur);
+            
+            int curStreak = 1;
+            
+            int prev = cur - 1;
+            while (numsSet.contains(prev)) {
+                numsSet.remove(prev);
+                curStreak++;
+                prev--;
+            }
+            
+            int next = cur + 1;
+            while (numsSet.contains(next)) {
+                numsSet.remove(next);
+                curStreak++;
+                next++;
+            }
+            
+            if (curStreak > streak) {
+                streak = curStreak;
+            }
+        }
+        
+        return streak;
+        
+    }
+}
