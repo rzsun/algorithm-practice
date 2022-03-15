@@ -33,4 +33,56 @@ class Solution {
         
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
+    
+    public boolean isSameTree2(TreeNode p, TreeNode q) {
+        
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        
+        if (p == null && q == null) {
+            return true;
+        }
+        
+        if (p == null || q == null) {
+            return false;
+        }
+        stack.addLast(p);
+        stack.addLast(q);
+        
+        while (!stack.isEmpty()) {
+            p = stack.removeFirst();
+            q = stack.removeFirst();
+            
+            if (p.val != q.val) {
+                return false;
+            }
+            
+            if (p.left != null && q.left != null) {
+                stack.addLast(p.left);
+                stack.addLast(q.left);
+            }
+            
+            if (p.left == null && q.left != null) {
+                return false;
+            }
+            
+            if (p.left != null && q.left == null) {
+                return false;
+            }
+            
+            if (p.right != null && q.right != null) {
+                stack.addLast(p.right);
+                stack.addLast(q.right);
+            }
+            
+            if (p.right == null && q.right != null) {
+                return false;
+            }
+            
+            if (p.right != null && q.right == null) {
+                return false;
+            }
+            
+        }
+        return true;
+    }
 }
