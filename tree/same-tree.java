@@ -14,6 +14,8 @@
  * }
  */
 class Solution {
+    
+    // recursive
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
@@ -34,6 +36,7 @@ class Solution {
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
     
+    // iterative
     public boolean isSameTree2(TreeNode p, TreeNode q) {
         
         Deque<TreeNode> stack = new ArrayDeque<>();
