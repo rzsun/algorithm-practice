@@ -1,14 +1,13 @@
 class Solution {
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
-        
         Map<Integer, Integer> refuels = new HashMap<>();
-        
         refuels.put(0, startFuel);
-        
         
         for (int i = 0; i < stations.length; i++) {
             int curMax = refuels.keySet().size();
+            
             for (int j = curMax; j > 0; j--) {
+                
                 int fuel = stations[i][1];
                 int position = stations[i][0];
                 
@@ -16,9 +15,7 @@ class Solution {
                     if (!refuels.containsKey(j)) {
                         refuels.put(j, refuels.get(j - 1) + fuel);
                     } else {
-                        refuels.put(j, 
-                                    Math.max(refuels.get(j),
-                                             refuels.get(j - 1) + fuel));
+                        refuels.put(j, Math.max(refuels.get(j), refuels.get(j - 1) + fuel));
                     }
                 }
             }
@@ -30,6 +27,5 @@ class Solution {
             }
         }
         return -1;
-        
     }
 }
