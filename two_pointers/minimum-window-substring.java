@@ -6,10 +6,8 @@ class Solution {
         }
         
         int count = chars.keySet().size();
-
         Integer min = null;
         int subStart = 0;
-        
         int low = 0;
         int high = 0;
 
@@ -28,7 +26,6 @@ class Solution {
                     subStart = low;
                     min = high - low;
                 }
-
                 c = s.charAt(low++);
                 if (!chars.containsKey(c)) {
                     continue;
@@ -38,7 +35,6 @@ class Solution {
                     count++;
                 }
             }
-            
         }
         if (min == null) {
             return "";
