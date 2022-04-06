@@ -6,16 +6,19 @@ class Solution {
         Map<Character, Integer> times = new HashMap<>();
         
         for (int i = 0; i < s1.length(); i++) {
-            char c = s1.charAt(i);
-            times.put(c, times.getOrDefault(c, 0) - 1);
-        }
-        for (int i = 0; i < s1.length(); i++) {
-            char c = s2.charAt(i);
-            times.put(c, times.getOrDefault(c, 0) + 1);
-            if (times.get(c) == 0) {
-                times.remove(c);
+            char remove = s1.charAt(i);
+            times.put(remove, times.getOrDefault(remove, 0) - 1);
+            if (times.get(remove) == 0) {
+                times.remove(remove);
+            }
+            
+            char add = s2.charAt(i);
+            times.put(add, times.getOrDefault(add, 0) + 1);
+            if (times.get(add) == 0) {
+                times.remove(add);
             }
         }
+        
         if (times.keySet().size() == 0) {
             return true;
         }
