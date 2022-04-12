@@ -1,31 +1,30 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> results = new ArrayList<>();
-        backtrack(new HashSet<>(
-            Arrays.stream(nums).boxed()
-            .collect(Collectors.toSet())), 
-                  new ArrayList<>(), results);
+        backtrack(nums, new HashSet<>(), new ArrayList<>(), results);
         return results;
     }
     
-    public void backtrack(
-        Set<Integer> remaining, 
-        List<Integer> current, 
-        List<List<Integer>> results) {
+    public void backtrack(int[] nums,
+                          Set<Integer> used, 
+                          List<Integer> current, 
+                          List<List<Integer>> results) {
         
-        if (remaining.isEmpty()) {
-            results.add(current);
+        if (used.size() == nums.length) {
+            results.add(new ArrayList<>(current));
             return;
         }
         
-        for (Integer val : remaining) {
-            List<Integer> newCurrent = new ArrayList<>(current);
-            Set<Integer> newRemaining = new HashSet<>(remaining);
-            
-            newCurrent.add(val);
-            newRemaining.remove(val);
-            backtrack(newRemaining, newCurrent, results);
+        for (int i = 0; i < nums.length; i++) {
+            if (used.contains(i)) {
+                continue;
+            }
+            int val = nums[i];
+            used.add(i);
+            current.add(val);
+            backtrack(nums, used, current, results);
+            current.remove(current.size() - 1);
+            used.remove(i);
         }
-        
     }
 }
