@@ -5,7 +5,6 @@ class Solution {
         return results;
     }
     
-    
     public void recurse(int[] candidates,
                         int start,
                         int target, 
@@ -15,13 +14,13 @@ class Solution {
             return;
         }
         if (target == 0) {
-            results.add(combo);
+            results.add(new ArrayList<>(combo));
         }
         
         for (int i = start; i < candidates.length; i++) {
-            List<Integer> copy = new ArrayList<>(combo);
-            copy.add(candidates[i]);
-            recurse(candidates, i, target - candidates[i], copy, results);
+            combo.add(candidates[i]);
+            recurse(candidates, i, target - candidates[i], combo, results);
+            combo.remove(combo.size() - 1);
         }
     }
 }
