@@ -4,13 +4,6 @@ class Solution {
     private int n;
     private int offset;
     
-    /**
-    n = 4
-    [0, 1, 2, 3]
-    [0, 2] 0 -> 3
-    //2 -> 3
-    
-    */
     public Solution(int n, int[] blacklist) {
         this.map = new HashMap<>();
         this.n = n;
