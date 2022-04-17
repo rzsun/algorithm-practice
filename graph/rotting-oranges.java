@@ -1,6 +1,6 @@
 class Solution {
     
-    int[][] DIRS = new int[][]{
+    public static final int[][] DIRS = new int[][]{
         {0, 1},
         {0, -1},
         {1, 0},
