@@ -25,7 +25,7 @@ Deep dive (20 minutes)
         - DNS
         - CDN (push vs pull)
         - Load Balancers (Active-Passive, Active-Active, Layer 4 [Transport], Layer 7 [Application])
-        - Service Mesh (Reverse proxy, Service discovery, Service routing, Health-check/metrics)
+        - Service Mesh (Reverse proxy, AuthN/Z, Service discovery, Service routing, Health-check/metrics)
         - Storage layer
         - Cache layer
             - Locations: Client, CDN, Server, Application, Storage
