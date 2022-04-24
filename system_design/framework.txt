@@ -1,0 +1,45 @@
+Define scope (5 minutes)
+   - Functional requirements
+   - Non-goals
+   - Who is the user?
+   - How many users?
+   - Usage patterns
+Estimations and (Non-functional) Requirements (10 minutes)
+   - Traffic throughput
+       - Read QPS/volume
+       - Write QPS/volume
+       - Read/write ratio
+   - Storage estimates
+   - SLA
+       - Latency (p50, p90, p99)
+       - Uptime
+       - Consistency (linearizability) vs availability
+High level design (10 minutes)
+   - Read/write API
+       - Algorithm
+   - Object model/Database schema
+Deep dive (20 minutes)
+   - Scaling the algorithm
+   - Components
+       - DNS
+       - CDN (Push vs Pull)
+       - Load Balancers: Active-Passive, Active-Active, Layer 4 (Transport), Layer 7 (Application)
+       - Service Mesh (Reverse Proxy, Service Discovery, Service Routing, Metrics)
+       - Application services/Microservices
+           - API, sync/async
+       - Communication
+           - TCP, UDP
+           - HTTP - REST, RPC
+           - Async: message queues, pub/sub
+       - Storage Layer
+           - RDBMS (Rigid schema, ACID, Strong consistency, Normalized data, Vertical scaling)
+               - Master-slave, Master-master, Federation, Sharding, Denormalization, SQL Tuning
+           - NoSQL (Advantages - Loose schema, Horizontal Scaling)
+               - Key-Value, Wide-Column, Graph, Document
+       - Cache Layer
+           - Client caching, CDN caching, Webserver caching, Database caching, Application
+           caching, Cache @Query level, Cache @Object level
+           - Cache strategies: Cache-Aside, Read-Through, Write-Through, Write-Around, Write-Back
+Justify
+   - Throughput, latency
+
