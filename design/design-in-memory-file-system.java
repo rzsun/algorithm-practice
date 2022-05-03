@@ -1,63 +1,68 @@
 class FileSystem {
-    
+    static final String DELIMITER = "/";
+
     class File {
         boolean isDir;
-        String content;
+        StringBuilder content;
         Map<String, File> children;
+        
         File(boolean isDir) {
             this.isDir = isDir;
             if (isDir) {
                 children = new TreeMap<>();
+            } else {
+                content = new StringBuilder();
             }
         }
-        File(String content) {
-            this(false);
-            this.content = content;
+        
+        void append(String s) {
+            this.content.append(s);
         }
     }
-    
+
     File root;
 
     public FileSystem() {
         root = new File(true);
     }
-    
+
     public List<String> ls(String path) {
-        String[] parts = path.split("/");
-        File f = getFile(parts);
+        String[] parts = parseParts(path);
         List<String> output = new ArrayList<>();
+
+        File f = getFile(parts);
         if (f.isDir) {
             output.addAll(f.children.keySet());
         } else {
-            output.add(parts[parts.length - 1]);
+            String fileName = parts[parts.length - 1];
+            output.add(fileName);
         }
         return output;
     }
-    
-    public void mkdir(String path) {
-        String[] parts = path.split("/");
-        getFile(parts);
-    }
-    
-    public void addContentToFile(String filePath, String content) {
-        String[] parts = filePath.split("/");
-        File dir = getFile(
-            Arrays.copyOfRange(parts, 0, parts.length-1));
 
+    public void mkdir(String path) {
+        getFile(parseParts(path));
+    }
+
+    public void addContentToFile(String filePath, String content) {
+        String[] parts = parseParts(filePath);
+        File dir = getFile(Arrays.copyOfRange(parts, 0, parts.length-1));
         String fileName = parts[parts.length-1];
         if (!dir.children.containsKey(fileName)) {
-            dir.children.put(fileName, new File(""));
+            dir.children.put(fileName, new File(false));
         }
-        File f = dir.children.get(fileName);
-        f.content += content;
+        dir.children.get(fileName).append(content);
     }
-    
+
     public String readContentFromFile(String filePath) {
-        String[] parts = filePath.split("/");
-        return getFile(parts).content;
+        return getFile(parseParts(filePath)).content.toString();
     }
     
-    // gets Directory or creates if not exist
+    private String[] parseParts(String path) {
+        return path.split(DELIMITER);
+    }
+
+    // gets dir or creates if not exist
     private File getFile(String[] parts) {
         File dir = root;
         for (String part : parts) {
