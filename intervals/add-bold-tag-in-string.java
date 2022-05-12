@@ -1,6 +1,5 @@
 class Solution {
     public String addBoldTag(String s, String[] words) {
-        
         // all start and end occurances of words
         List<int[]> intervals = new ArrayList<>();
         for (String word : words) {
@@ -13,8 +12,12 @@ class Solution {
         if (intervals.size() == 0) {
             return s;
         }
+        List<int[]> merged = mergeIntervals(intervals);
+        return addBoldTags(s, merged);
+    }
+    
+    public List<int[]> mergeIntervals(List<int[]> intervals) {
         Collections.sort(intervals, (a,b) -> a[0] - b[0]);
-        
         List<int[]> merged = new ArrayList<>();
         int[] first = intervals.get(0);
         int start = first[0];
@@ -28,10 +31,13 @@ class Solution {
             end = Math.max(end, cur[1]);
         }
         merged.add(new int[]{start, end});
-        
+        return merged;
+    }
+    
+    public String addBoldTags(String s, List<int[]> intervals) {
         StringBuilder result = new StringBuilder();
-        start = 0;
-        for (int[] interval : merged) {
+        int start = 0;
+        for (int[] interval : intervals) {
             if (interval[0] - start > 0) {
                 result.append(s.substring(start, interval[0]));
             }
