@@ -3,7 +3,7 @@ class Solution {
     public int maxProfit(int[] prices) {
         int n = prices.length;
         
-        // max profit resting stock at day i
+        // max profit resting at day i
         int[] rest = new int[n];
         // max profit selling at day i
         int[] sold = new int[n];
