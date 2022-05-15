@@ -1,3 +1,4 @@
+```
 class Solution {
     
     public List<List<Integer>> getSkyline(int[][] buildings) {
@@ -8,6 +9,8 @@ class Solution {
             xs.add(b[0]);
             xs.add(b[1]);
         }
+		
+		// sort X coordinates and buildings by building start for left to right iteration 
         Collections.sort(xs);
         Arrays.sort(buildings, (a,b)->a[0]-b[0]);
         
@@ -16,7 +19,7 @@ class Solution {
         PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->b[2]-a[2]);
         
         int i = 0;
-        int prevHeight = 0;
+        int prevHeight = 0; // track previous height to determine if we need to add new point
         List<List<Integer>> results = new ArrayList<>();
         
         // iterate over all X coordinates
@@ -35,7 +38,7 @@ class Solution {
             
             // if current height is different than previous height
             // then we have a new point to add to skyline
-            int curHeight = 0;
+            int curHeight = 0; // if no buildings, height is 0
             if (!heap.isEmpty()) {
                 curHeight = heap.peek()[2];
             }
@@ -48,3 +51,4 @@ class Solution {
         return results;
     }
 }
+```
