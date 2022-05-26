@@ -8,20 +8,18 @@ class Employee {
 */
 
 class Solution {
-    
     public int getImportance(List<Employee> employees, int id) {
         Map<Integer, Employee> employeeMap = new HashMap<>();
-        for (int i = 0; i < employees.size(); i++) {
-            Employee e = employees.get(i);
+        for (Employee e : employees) {
             employeeMap.put(e.id, e);
         }
-        return totalImportance(employeeMap, employeeMap.get(id));
+        return dfs(employeeMap, employeeMap.get(id));
     }
     
-    public int totalImportance(Map<Integer, Employee> employeeMap, Employee root) {
+    public int dfs(Map<Integer, Employee> employeeMap, Employee root) {
         int sum = root.importance;
         for (Integer id : root.subordinates) {
-            sum += totalImportance(employeeMap, employeeMap.get(id));
+            sum += dfs(employeeMap, employeeMap.get(id));
         }
         return sum;
     }
