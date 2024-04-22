@@ -1,14 +1,11 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-import math
-
-
-class Solution(object):
-    def verticalOrder(self, root):
+class Solution:
+    def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         """
         :type root: TreeNode
         :rtype: List[List[int]]
@@ -24,7 +21,7 @@ class Solution(object):
             i += 1
         return res
 
-    def traverse(self, root, map):
+    def traverse(self, root: Optional[TreeNode], map: dict[int, list[int]]):
         if root == None:
             return
         cur = [(root, 0)]
